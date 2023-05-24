@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chatbot Demo</title>
+    <style>
+        .chat-container {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f7f7f7;
+        }
+        .chat-log {
+            height: 300px;
+            overflow-y: scroll;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .user-message {
+            margin-bottom: 10px;
+            text-align: right;
+        }
+        .bot-message {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .user-input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .button-container {
+            text-align: center;
+        }
+        .submit-button {
+            padding: 5px 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-log" id="chatLog"></div>
+        <div class="user-message">
+            <input type="text" id="userInput" class="user-input" placeholder="Type your message..." autofocus>
+        </div>
+        <div class="button-container">
+            <button class="submit-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatLog = document.getElementById('chatLog');
+        const userInput = document.getElementById('userInput');
+
+        function sendMessage() {
+            const userMessage = userInput.value;
+            appendMessage('user', userMessage);
+            userInput.value = '';
+
+            // Call the AI backend or process the user message here
+            // You can use APIs or custom logic to generate a response
+
+            const botMessage = generateBotResponse(userMessage);
+            appendMessage('bot', botMessage);
+        }
+
+        function appendMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add(sender + '-message');
+            messageElement.textContent = message;
+            chatLog.appendChild(messageElement);
+
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        function generateBotResponse(userMessage) {
+            // Implement your AI logic here
+            // You can use conditionals, predefined responses, or machine learning models to generate the bot's response
+            // For this demo, let's just echo the user's message
+            return 'You said: ' + userMessage;
+        }
+    </script>
+</body>
+</html>
